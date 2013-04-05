@@ -168,10 +168,7 @@ private[producer] class ZKBrokerPartitionInfo(config: ZKConfig, producerCbk: (In
       val brokerTopicPath = ZkUtils.BrokerTopicsPath + "/" + topic
       val brokerList = ZkUtils.getChildrenParentMayNotExist(zkClient, brokerTopicPath)
 
-      val numPartitions = brokerList.map{bid =>
-        val x = ZkUtils.readData(zkClient, brokerTopicPath + "/" + bid)
-        if (x == "") 0 else bid.toInt
-      }
+      val numPartitions = brokerList.map { bid => ZkUtils.readData(zkClient, brokerTopicPath + "/" + bid).toInt }
 
       val brokerPartitions = brokerList.map(bid => bid.toInt).zip(numPartitions)
       val sortedBrokerPartitions = brokerPartitions.sortWith((id1, id2) => id1._1 < id2._1)
