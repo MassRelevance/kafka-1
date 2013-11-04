@@ -27,16 +27,16 @@ object KafkaBuild extends Build {
     version := "0.7.2",
     organization := "com.massrelevance",
     scalacOptions ++= Seq("-deprecation", "-unchecked"),
-    scalaVersion := "2.10.2",
+    scalaVersion := "2.10.3",
     javacOptions ++= Seq("-Xlint:unchecked", "-source", "1.5"),
     parallelExecution in Test := false, // Prevent tests from overrunning each other
     libraryDependencies ++= Seq(
       "org.scalatest"         %% "scalatest"    % "1.9" % "test",
       "log4j"                 %  "log4j"        % "1.2.17",
       "net.sf.jopt-simple"    %  "jopt-simple"  % "3.3",
-      "org.slf4j"             %  "slf4j-simple" % "1.6.6",
-      "org.scala-lang"        % "scala-actors"  % "2.10.2",
-      "org.xerial.snappy" % "snappy-java" % "1.0.5"
+      "org.slf4j"             %  "slf4j-simple" % "1.7.5",
+      "org.scala-lang"        % "scala-actors"  % "2.10.3",
+      "org.xerial.snappy" % "snappy-java" % "1.1.0"
     ),
     // The issue is going from log4j 1.2.14 to 1.2.15, the developers added some features which required
     // some dependencies on various sun and javax packages.
