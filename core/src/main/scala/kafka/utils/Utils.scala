@@ -823,19 +823,18 @@ class SnapshotStats(private val monitorDurationNs: Long = 600L * 1000L * 1000L *
 /**
  *  A wrapper that synchronizes JSON in scala, which is not threadsafe.
  */
-object SyncJSON extends Logging {
-  val myConversionFunc = {input : String => input.toInt}
-  JSON.globalNumberParser = myConversionFunc
-  val lock = new Object
+object JSON extends Logging {
+  import org.json4s.DefaultFormats
+  import org.json4s.jackson.JsonMethods._
 
-  def parseFull(input: String): Option[Any] = {
-    lock synchronized {
-      try {
-        JSON.parseFull(input)
-      } catch {
-        case t =>
-          throw new RuntimeException("Can't parse json string: %s".format(input), t)
-      }
+  implicit val formats = DefaultFormats
+
+  def parseFull(input: String): Option[Map[String, Int]] = {
+    try {
+      Some(parse(input).extract[Map[String, Int]])
+    } catch {
+      case t =>
+        throw new RuntimeException("Can't parse json string: %s".format(input), t)
     }
   }
 }
