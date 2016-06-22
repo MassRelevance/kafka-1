@@ -271,6 +271,7 @@ public class KafkaConsumerTest {
         Node node = cluster.nodes().get(0);
         client.setNode(node);
         Metadata metadata = new Metadata(0, Long.MAX_VALUE);
+        metadata.add(topic);
         metadata.update(cluster, time.milliseconds());
         PartitionAssignor assignor = new RoundRobinAssignor();
 
@@ -391,6 +392,7 @@ public class KafkaConsumerTest {
         Node node = cluster.nodes().get(0);
         client.setNode(node);
         Metadata metadata = new Metadata(0, Long.MAX_VALUE);
+        metadata.add(topic);
         metadata.update(cluster, time.milliseconds());
         PartitionAssignor assignor = new RoundRobinAssignor();
 
@@ -469,6 +471,7 @@ public class KafkaConsumerTest {
         Node node = cluster.nodes().get(0);
         client.setNode(node);
         Metadata metadata = new Metadata(0, Long.MAX_VALUE);
+        metadata.add(topic);
         metadata.update(cluster, time.milliseconds());
         PartitionAssignor assignor = new RoundRobinAssignor();
 
